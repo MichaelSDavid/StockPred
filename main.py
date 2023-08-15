@@ -19,7 +19,7 @@ def make_dataset(df):
     return x, y
 
 # Read and form train/test frames
-df = pd.read_csv("ABR.csv")
+df = pd.read_csv("./data_and_tests/ABR.csv")
 df = df["Open"].values.reshape(-1, 1)
 dataset_train = np.array(df[:int(df.shape[0]*0.8)])
 dataset_test = np.array(df[int(df.shape[0]*0.8):])
@@ -33,24 +33,24 @@ dataset_test = scaler.transform(dataset_test)
 x_train, y_train = make_dataset(dataset_train)
 x_test, y_test = make_dataset(dataset_test)
 
-# Define RNN model
-# model = Sequential()
-# model.add(LSTM(units=96, return_sequences=True, input_shape=(x_train.shape[1], 1)))
-# model.add(Dropout(0.2))
-# model.add(LSTM(units=96, return_sequences=True))
-# model.add(Dropout(0.2))
-# model.add(LSTM(units=96, return_sequences=True))
-# model.add(Dropout(0.2))
-# model.add(LSTM(units=96))
-# model.add(Dropout(0.2))
-# model.add(Dense(units=1))
+# Define RNN model (comment out on testing)
+model = Sequential()
+model.add(LSTM(units=96, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+model.add(Dropout(0.2))
+model.add(LSTM(units=96, return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(units=96, return_sequences=True))
+model.add(Dropout(0.2))
+model.add(LSTM(units=96))
+model.add(Dropout(0.2))
+model.add(Dense(units=1))
 
-# Compile, train, and save
-# x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
-# x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
-# model.compile(loss="mean_squared_error", optimizer="adam")
-# model.fit(x_train, y_train, epochs=50, batch_size=32)
-# model.save("stock_prediction.keras")
+# Compile, train, and save (comment out on testing)
+x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
+x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+model.compile(loss="mean_squared_error", optimizer="adam")
+model.fit(x_train, y_train, epochs=50, batch_size=32)
+model.save("stock_prediction.keras")
 
 # Load model and sample CSV
 model = load_model("stock_prediction.keras")
