@@ -60,7 +60,7 @@ y_test_scaled = scaler.inverse_transform(y_test.reshape(-1, 1))
 
 # Plot results
 fig, ax = plt.subplots(figsize=(16,8))
-fig.canvas.manager.set_window_title("StockPred")
+fig.canvas.manager.set_window_title("StockPredictor")
 ax.set_facecolor("#2d313b")
 ax.set_title("Stock Prediction")
 ax.plot(y_test_scaled, color="magenta", label="Original price")
